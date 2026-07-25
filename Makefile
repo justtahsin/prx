@@ -59,7 +59,14 @@ release: ## Cross-compile clients (and servers where they make sense)
 # ---------------------------------------------------------------- android
 
 ANDROID_HOME ?= $(HOME)/Android/Sdk
-ANDROID_NDK_HOME ?= $(firstword $(wildcard $(ANDROID_HOME)/ndk/*))
+
+# An ANDROID_NDK_HOME exported as an empty string still counts as "set" to
+# make's ?=, which would leave it empty rather than falling back. CI runners
+# do export it blank, so test the value instead of whether it is defined.
+ifeq ($(strip $(ANDROID_NDK_HOME)),)
+ANDROID_NDK_HOME := $(firstword $(wildcard $(ANDROID_HOME)/ndk/*))
+endif
+
 AAR := android/app/libs/prxmobile.aar
 
 .PHONY: aar

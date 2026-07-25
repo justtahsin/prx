@@ -61,9 +61,24 @@ jobs:
           go install golang.org/x/mobile/cmd/gobind@latest
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
 
+      # The NDK path differs between runner images, and the workflow `env`
+      # context cannot see variables the runner exports into the shell, so it
+      # is resolved here rather than guessed.
+      - name: Locate the Android NDK
+        run: |
+          ndk="${ANDROID_NDK_LATEST_HOME:-}"
+          if [ -z "$ndk" ]; then
+            ndk=$(ls -d "$ANDROID_HOME"/ndk/* 2>/dev/null | tail -1)
+          fi
+          if [ -z "$ndk" ]; then
+            echo "no NDK on this runner; contents of $ANDROID_HOME:"
+            ls -la "$ANDROID_HOME" || true
+            exit 1
+          fi
+          echo "using NDK: $ndk"
+          echo "ANDROID_NDK_HOME=$ndk" >> "$GITHUB_ENV"
+
       - name: Build the Go client as an Android library
-        env:
-          ANDROID_NDK_HOME: ${{ env.ANDROID_NDK_LATEST_HOME }}
         run: make aar
 
       - name: Build the app
