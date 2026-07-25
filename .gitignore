@@ -1,0 +1,36 @@
+# Build output
+bin/
+dist/
+/prx
+/prxd
+*.tmp
+
+# Credentials and runtime state. A users file holds every user's pre-shared
+# key and a server config points at it; neither belongs in a repository, and
+# `prxd init` creates both anyway.
+users.json
+server.json
+client.json
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+
+# Local tool state. Claude Code records the commands it has been allowed to
+# run, and those can carry a host address or a secret.
+.claude/settings.local.json
+.claude/*.tmp*
+
+# Android build output and machine-specific paths
+android/build/
+android/app/build/
+android/.gradle/
+android/local.properties
+android/app/libs/*.aar
+android/app/libs/*.jar
+
+# Editor and OS noise
+.idea/
+*.iml
+.DS_Store
