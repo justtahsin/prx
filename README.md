@@ -1,5 +1,9 @@
 # prx
 
+[![CI](https://github.com/justtahsin/prx/actions/workflows/ci.yml/badge.svg)](https://github.com/justtahsin/prx/actions/workflows/ci.yml)
+[![release](https://img.shields.io/github/v/release/justtahsin/prx)](https://github.com/justtahsin/prx/releases/latest)
+[![license](https://img.shields.io/github/license/justtahsin/prx)](LICENSE)
+
 Xray/V2Ray sınıfı bir proxy sistemi — ama kurulumu iki komut, bağlanması tek
 link. Sunucu ve istemci tek dosyalık statik Go ikilileri; başka hiçbir şey
 kurmanız gerekmiyor.
@@ -147,8 +151,11 @@ masaüstüyle **aynı koddur**; `gomobile` ile `.aar` olarak derlenir, telefonun
 IP paketleri `gvisor` tabanlı bir kullanıcı-alanı ağ yığınında bağlantılara
 dönüştürülür ve tünele verilir.
 
+Hazır APK: [**son sürümü indir**](https://github.com/justtahsin/prx/releases/latest)
+(`arm64` neredeyse her telefon için doğru olanı). Kendiniz derlemek isterseniz:
+
 ```bash
-make apk    # android/app/build/outputs/apk/release/app-release.apk
+make apk    # android/app/build/outputs/apk/release/ altına üç APK
 ```
 
 APK'yı telefona aktarıp kurun (Bilinmeyen kaynaklara izin vermeniz gerekir).
@@ -275,3 +282,7 @@ Sırada:
 1. **Akış çoğullama (mux)** — mobilde pil ömrü için tek bağlantı üzerinden
    çok akış. Protokolde yeni bir komut olarak eklenecek, mevcut yapı bozulmaz.
 3. **Kullanım istatistikleri** — kullanıcı başına trafik sayaçları ve kota.
+
+## Lisans
+
+MIT — bkz. [LICENSE](LICENSE).
